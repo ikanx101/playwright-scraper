@@ -7,8 +7,6 @@
 async function scrollThroughPage(page, url = '') {
     // Pengaturan scroll
     const maxNoNewContent = 5;
-    const maxScrollAttempts = 50;
-    let scrollAttempts = 0;
     let noNewContentCount = 0;
     let lastContentHash = null;
     let lastDocumentHeight = 0;
@@ -65,8 +63,7 @@ async function scrollThroughPage(page, url = '') {
     lastElementsCount = initialState.elementsCount;
 
     // Loop scroll
-    while (noNewContentCount < maxNoNewContent && scrollAttempts < maxScrollAttempts) {
-        scrollAttempts++;
+    while (noNewContentCount < maxNoNewContent) {
         const viewportHeight = page.viewportSize().height;
 
         // Jumlah scroll yang lebih efisien untuk halaman panjang
@@ -114,7 +111,7 @@ async function scrollThroughPage(page, url = '') {
         if (contentChanged || elementsChanged || heightChanged) {
             noNewContentCount = 0;
             if (contentChanged) {
-                console.log(`[${url}] Konten teks baru ditemukan (scroll ${scrollAttempts})`);
+                console.log(`[${url}] Konten teks baru ditemukan`);
             }
             if (elementsChanged) {
                 console.log(`[${url}] Elemen DOM berubah: ${lastElementsCount} → ${newLoadingState.elementsCount}`);
@@ -147,14 +144,14 @@ async function scrollThroughPage(page, url = '') {
         }
 
         // Simulasi pembacaan (terjadi dengan probabilitas 10%)
-        if (Math.random() < 0.1 && scrollAttempts > 5) {
+        if (Math.random() < 0.1 && noNewContentCount > 5) {
             const readPause = Math.floor(Math.random() * 500) + 300;
             console.log(`[${url}] Jeda sebentar selama ${readPause}ms`);
             await page.waitForTimeout(readPause);
         }
 
         // Simulasi scroll ke atas (terjadi dengan probabilitas 5%)
-        if (Math.random() < 0.05 && scrollAttempts > 8) {
+        if (Math.random() < 0.05 && noNewContentCount > 8) {
             const backAmount = Math.floor(Math.random() * (viewportHeight * 0.2 - viewportHeight * 0.1) + viewportHeight * 0.1);
             await page.evaluate((backAmount) => {
                 window.scrollBy({
@@ -166,19 +163,7 @@ async function scrollThroughPage(page, url = '') {
         }
     }
 
-    // Scroll ke bawah jika mencapai batas percobaan
-    if (scrollAttempts >= maxScrollAttempts) {
-        console.log(`[${url}] Mencapai batas percobaan scroll (${maxScrollAttempts}), memaksa scroll ke bawah`);
-        await page.evaluate(() => {
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
-        });
-        await page.waitForTimeout(1500);
-    }
-
-    console.log(`[${url}] Selesai scroll setelah ${scrollAttempts} operasi scroll`);
+    console.log(`[${url}] Selesai scroll`);
 }
 
 module.exports = {
