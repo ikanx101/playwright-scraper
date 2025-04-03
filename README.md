@@ -30,6 +30,12 @@ Scraper web modular dengan kemampuan paralel untuk menyimpan halaman web secara 
 ## Instalasi
 
 ```bash
+
+# Update nodejs to the lates version
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
 # Clone repository
 git clone <repository-url>
 cd <repository-directory>
