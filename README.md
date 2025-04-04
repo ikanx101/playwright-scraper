@@ -2,6 +2,8 @@
 
 Scraper web modular dengan kemampuan paralel untuk menyimpan halaman web secara lengkap, termasuk konten dinamis yang dimuat saat scroll.
 
+_Credit to: Mas Apriandito_.
+
 ## Fitur
 
 - ✅ Pemrosesan paralel untuk multiple URL
@@ -36,6 +38,10 @@ sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
 
+# install playwright
+npx playwright install-deps
+npx playwright install
+
 # Clone repository
 git clone <repository-url>
 cd <repository-directory>
@@ -50,7 +56,7 @@ npm install
 
 ```bash
 # Menjalankan dengan konfigurasi default
-node index.js
+node index.js --headless
 
 # Menjalankan dengan opsi kustom
 node index.js --concurrency 2 --headless --output custom_output
@@ -61,55 +67,6 @@ node index.js --concurrency 2 --headless --output custom_output
 - `--concurrency <number>`: Jumlah URL yang diproses secara bersamaan
 - `--headless`: Menjalankan browser dalam mode headless (tanpa UI)
 - `--output <directory>`: Direktori untuk menyimpan hasil
-
-### Menggunakan sebagai Modul
-
-```javascript
-const { runScraper } = require('./index');
-
-// URLs yang akan di-scrape
-const urls = [
-    "https://www.example.com/page1",
-    "https://www.example.com/page2"
-];
-
-// Opsi kustom
-const options = {
-    outputDir: 'custom_output',
-    concurrency: 2,
-    headless: true
-};
-
-// Menjalankan scraper
-(async () => {
-    try {
-        const results = await runScraper(urls, options);
-        console.log("Hasil:", results);
-    } catch (error) {
-        console.error("Error:", error);
-    }
-})();
-```
-
-## Konfigurasi
-
-Anda dapat mengubah konfigurasi default di file `config.js`:
-
-```javascript
-module.exports = {
-    defaultOptions: {
-        outputDir: 'saved_pages',
-        timeout: 30000,
-        retryCount: 3,
-        retryDelay: 5,
-        concurrency: 3,
-        headless: false
-    },
-    urls: [
-        // URLs default untuk di-scrape
-    ]
-};
-```
 
 ## Opsi Konfigurasi
 
