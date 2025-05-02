@@ -38,6 +38,9 @@ sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
 
+# Install dependencies
+npm install
+
 # install playwright
 npx playwright install-deps
 npx playwright install
@@ -45,9 +48,6 @@ npx playwright install
 # Clone repository
 git clone <repository-url>
 cd <repository-directory>
-
-# Install dependencies
-npm install
 ```
 
 ## Penggunaan
@@ -57,6 +57,9 @@ npm install
 ```bash
 # Menjalankan dengan konfigurasi default
 node index.js --headless
+
+# berjalan pake head
+xvfb-run node index.js
 
 # Menjalankan dengan opsi kustom
 node index.js --concurrency 2 --headless --output custom_output
