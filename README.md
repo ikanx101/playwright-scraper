@@ -32,6 +32,8 @@ _Credit to: Mas Apriandito_.
 ## Instalasi
 
 ```bash
+# install dulu
+apt install npm
 
 # Update nodejs to the lates version
 sudo npm cache clean -f
