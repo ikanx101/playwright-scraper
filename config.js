@@ -14,7 +14,6 @@ module.exports = {
     
     // URLs to scrape
     urls: [
-	"https://shopee.co.id/SiS-GO-Energy-Gel-Isotonic-60ml-Bstores-i.106955054.4522546469?sp_atk=6a4c3e5c-7794-42a5-b20e-fc08846a34ae&xptdk=6a4c3e5c-7794-42a5-b20e-fc08846a34ae",
-	'https://www.tokopedia.com/torch-id/product'
+	"https://dapo.kemendikdasmen.go.id/sp"
     ]
 }; 
