@@ -6,9 +6,9 @@ module.exports = {
     defaultOptions: {
         outputDir: 'saved_pages',
         timeout: 40000,
-        retryCount: 5,
-        retryDelay: 6,
-        concurrency: 8,
+        retryCount: 10,
+        retryDelay: 8,
+        concurrency: 4,
         headless: false
     },
     
